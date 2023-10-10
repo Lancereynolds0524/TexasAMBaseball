@@ -10,14 +10,14 @@ library(purrr)
 "Regardless of whether running the model with or without spray angle, run the 2 code blocks
 and two functions below first"
 
-# This reads is the data we will build the model on
-data <- read.csv("C:/Users/phill/OneDrive/Desktop/Trackman_All/Trackman_2022_All.csv")
+# This reads is the data we will build the model on (e.g. 2022 Trackman Data)
+data <- read.csv("Trackman_model.csv")
 data$ExitSpeed_int <- round(data$ExitSpeed)
 data$Angle_int <- round(data$Angle)
 data$Direction_int <- round(data$Direction)
 
-# This is the data we will predict on
-new_data <- read.csv("C:/Users/phill/OneDrive/Desktop/Trackman_All/Trackman_2023_All.csv")
+# This is the data we will predict on (e.g. 2023 Trackman Data)
+new_data <- read.csv("Trackman_predict.csv")
 new_data$ExitSpeed_int <- round(new_data$ExitSpeed)
 new_data$Angle_int <- round(new_data$Angle)
 new_data$Direction_int <- round(new_data$Direction)
@@ -113,6 +113,7 @@ rmse_values <- c()
 
 # This for loop iterates through different values of K from 1 to 100 and finds the K which 
 # Minimizes the prediction error (RMSE)
+# You can adjust the range of K if its clear the optimal K isn't in this range
 for (k in 1:100) {
   knnmodel = knnreg(train_x_scaled, as.numeric(unlist(train_y)), k = k)
   
@@ -246,6 +247,7 @@ rmse_values <- c()
 
 # This for loop iterates through different values of K from 1 to 100 and finds the K which 
 # Minimizes the prediction error (RMSE)
+# You can adjust the range of K if its clear the optimal K isn't in this range
 for (k in 50:80) {
   knnmodel = knnreg(train_x_scaled, as.numeric(unlist(train_y)), k = k)
   
@@ -259,7 +261,7 @@ for (k in 50:80) {
   }
 }
 
-plot(50:80, rmse_values, type = 'l')
+plot(1:100, rmse_values, type = 'l')
 
 # Using the best K, we build our knn regression model
 knnmodel = knnreg(train_x_scaled, as.numeric(unlist(train_y)), k = best_k)
