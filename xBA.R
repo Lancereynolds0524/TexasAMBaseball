@@ -10,7 +10,7 @@ library(purrr)
 "Regardless of whether running the model with or without spray angle, run the 2 code blocks
 and two functions below first"
 
-# This reads is the data we will build the model on (e.g. 2022 Trackman Data)
+# This is the data we will build the model on (e.g. 2022 Trackman Data)
 data <- read.csv("Trackman_model.csv")
 data$ExitSpeed_int <- round(data$ExitSpeed)
 data$Angle_int <- round(data$Angle)
